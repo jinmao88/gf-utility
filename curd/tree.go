@@ -18,7 +18,6 @@ type Tree struct {
 
 // TreeNode ConvertToINodeArray 其他的结构体想要生成菜单树，直接实现这个接口
 type TreeNode interface {
-	//entity.Permission | entity.Router
 	// GetTitle 获取显示名字
 	GetTitle() string
 	// GetId 获取id

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/github.com/jinmao/gf-utility.iml" filepath="$PROJECT_DIR$/.idea/github.com/jinmao/gf-utility.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gf-utility.iml" filepath="$PROJECT_DIR$/.idea/gf-utility.iml" />
     </modules>
   </component>
 </project>

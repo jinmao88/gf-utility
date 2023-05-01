@@ -3,7 +3,6 @@ package curd
 //import "Gf-Vben/internal/model/entity"
 
 type Options interface {
-	//entity.Permission | entity.Router
 	GetOptionLabel() string
 	GetOptionValue() string
 	GetOptionKey() string
