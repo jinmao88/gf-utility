@@ -1,4 +1,4 @@
-module github.com/jinmao/gf-utility
+module github.com/jinmao88/gf-utility
 
 go 1.20
 
