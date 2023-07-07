@@ -6,10 +6,10 @@ import (
 )
 
 type Menu struct {
-	Path      string `orm:"path" json:"path"`
-	Name      string `orm:"name" json:"name"`
-	Component string `orm:"component" json:"component"`
 	Meta      `json:"meta"`
+	Path      string     `orm:"path" json:"path"`
+	Name      string     `orm:"name" json:"name"`
+	Component string     `orm:"component" json:"component"`
 	Children  []*Menu    `json:"children"`
 	Status    int        `orm:"status" json:"status"`
 	CreateAt  gtime.Time `orm:"create_at" json:"create_at"`
@@ -43,7 +43,6 @@ func BuildRouter(routers []*Menu) (result []*Menu) {
 			sort.Slice(menu.Children, func(i, j int) bool {
 				return menu.Children[i].OrderNo < menu.Children[j].OrderNo
 			})
-
 		}
 	}
 	return

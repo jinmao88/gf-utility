@@ -1,4 +1,4 @@
-package curd
+package handler
 
 import (
 	"github.com/gogf/gf/v2/database/gdb"
@@ -38,4 +38,10 @@ func TimeRange(s, e any) func(m *gdb.Model) *gdb.Model {
 
 func TimeToday() func(m *gdb.Model) *gdb.Model {
 	return TimeRange(gtime.Now().StartOfDay(), gtime.Now())
+}
+
+func FieldExTime() func(m *gdb.Model) *gdb.Model {
+	return func(m *gdb.Model) *gdb.Model {
+		return m.FieldsEx("create_at,update_at,delete_at")
+	}
 }

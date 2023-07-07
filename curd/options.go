@@ -1,7 +1,5 @@
 package curd
 
-//import "Gf-Vben/internal/model/entity"
-
 type Options interface {
 	GetOptionLabel() string
 	GetOptionValue() string
