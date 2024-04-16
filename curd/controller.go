@@ -22,6 +22,7 @@ func Controller(ctx context.Context, req *CurdReq, check func(i string) (Curd, e
 	if err = g.RequestFromCtx(ctx).Parse(cu); err != nil {
 		return nil, gerror.NewCode(response.Code(2), err.Error())
 	}
+	cu.SetCtx(ctx)
 	switch req.Action {
 	case "list":
 		res.Data, err = cu.List()
