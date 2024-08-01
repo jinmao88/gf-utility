@@ -2,6 +2,7 @@ package curd
 
 import (
 	"context"
+	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -43,4 +44,21 @@ type Context struct {
 type Operator struct {
 	User int `p:"uid"`
 	Role int `p:"role"`
+}
+
+func (ctx *Context) ListResult(m *gdb.Model) (*List, error) {
+	count, err := m.Count()
+	if err != nil {
+		return nil, err
+	}
+	all, err := m.Page(ctx.Pagination.Page, ctx.Pagination.PageSize).All()
+	if err != nil {
+		return nil, err
+	}
+	return &List{
+		Items:    all,
+		Total:    count,
+		Page:     ctx.Pagination.Page,
+		PageSize: ctx.Pagination.PageSize,
+	}, nil
 }
