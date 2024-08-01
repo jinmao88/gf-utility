@@ -34,3 +34,13 @@ type List struct {
 	Page     int         `json:"page"`
 	PageSize int         `json:"pageSize"`
 }
+
+type Context struct {
+	Pagination
+	Operator Operator `p:"operator"`
+}
+
+type Operator struct {
+	User int `p:"uid"`
+	Role int `p:"role"`
+}
