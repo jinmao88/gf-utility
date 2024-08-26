@@ -47,8 +47,8 @@ func FieldExTime() func(m *gdb.Model) *gdb.Model {
 	}
 }
 
-func TimeRangeByColunm(s, e any, col string) func(m *gdb.Model) *gdb.Model {
+func TimeRangeByColumn(TimeRange []gtime.Time, col string) func(m *gdb.Model) *gdb.Model {
 	return func(m *gdb.Model) *gdb.Model {
-		return m.WhereBetween(col, s, e)
+		return m.WhereBetween(col, TimeRange[0], TimeRange[1])
 	}
 }
