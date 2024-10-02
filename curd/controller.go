@@ -13,8 +13,8 @@ type CurdReq struct {
 	Action    string `p:"a" v:"required"`
 }
 
-func Controller(ctx context.Context, req *CurdReq, check func(i string) (Curd, error)) (res response.Resp, err error) {
-	r := new(response.JsonRes)
+func Controller(ctx context.Context, req *CurdReq, check func(i string) (Curd, error)) (res response.JsonRes, err error) {
+	r := new(response.Resp)
 	cu, err := check(req.Interface)
 	if err != nil {
 		return nil, err
