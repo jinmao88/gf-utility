@@ -57,3 +57,43 @@ func JsonExit(r *ghttp.Request, err int, msg string, data ...interface{}) {
 	Json(r, err, msg, data...)
 	r.Exit()
 }
+
+// Resp 定义了一个响应接口，用于构建灵活的API响应
+type Resp interface {
+	// Format 用于格式化响应，包括状态码、消息和数据
+	// 参数:
+	//   code: 响应状态码
+	//   msg: 响应消息
+	//   data: 可变参数，用于传递响应数据
+	// 返回值:
+	//   Resp: 返回Resp接口，支持链式调用
+	Format(code int, msg string, data ...interface{}) Resp
+
+	// Code 用于设置响应状态码
+	// 参数:
+	//   code: 响应状态码
+	// 返回值:
+	//   Resp: 返回Resp接口，支持链式调用
+	Code(code int) Resp
+
+	// Msg 用于设置响应消息
+	// 参数:
+	//   msg: 响应消息
+	// 返回值:
+	//   Resp: 返回Resp接口，支持链式调用
+	Msg(msg string) Resp
+
+	// Data 用于设置响应数据
+	// 参数:
+	//   data: 响应数据
+	// 返回值:
+	//   Resp: 返回Resp接口，支持链式调用
+	Data(data interface{}) Resp
+
+	// JsonExit 用于将响应以JSON格式输出并结束请求处理
+	// 参数:
+	//   r: ghttp.Request指针，用于获取请求相关上下文
+	// 返回值: 无
+	// 注意: 该方法会直接输出JSON响应并结束请求处理流程
+	JsonExit(r *ghttp.Request)
+}
