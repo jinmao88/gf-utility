@@ -15,6 +15,32 @@ type JsonRes struct {
 	Data    interface{} `json:"result"`  // 返回数据(业务接口定义具体数据结构)
 }
 
+func (j *JsonRes) Format(code int, msg string, data ...interface{}) Resp {
+	j.Code = code
+	j.Message = msg
+	j.Data = data
+	return j
+}
+
+func (j *JsonRes) C(code int) Resp {
+	j.Code = code
+	return j
+}
+
+func (j *JsonRes) M(msg string) Resp {
+	j.Message = msg
+	return j
+}
+
+func (j *JsonRes) D(data interface{}) Resp {
+	j.Data = data
+	return j
+}
+
+func (j *JsonRes) JsonExit(r *ghttp.Request) {
+	r.Response.WriteJsonExit(j)
+}
+
 func Code(code int) gcode.Code {
 	return gcode.New(code, "", nil)
 }
@@ -69,26 +95,26 @@ type Resp interface {
 	//   Resp: 返回Resp接口，支持链式调用
 	Format(code int, msg string, data ...interface{}) Resp
 
-	// Code 用于设置响应状态码
+	// C 用于设置响应状态码
 	// 参数:
 	//   code: 响应状态码
 	// 返回值:
 	//   Resp: 返回Resp接口，支持链式调用
-	Code(code int) Resp
+	C(code int) Resp
 
-	// Msg 用于设置响应消息
+	// M 用于设置响应消息
 	// 参数:
 	//   msg: 响应消息
 	// 返回值:
 	//   Resp: 返回Resp接口，支持链式调用
-	Msg(msg string) Resp
+	M(msg string) Resp
 
-	// Data 用于设置响应数据
+	// D 用于设置响应数据
 	// 参数:
 	//   data: 响应数据
 	// 返回值:
 	//   Resp: 返回Resp接口，支持链式调用
-	Data(data interface{}) Resp
+	D(data interface{}) Resp
 
 	// JsonExit 用于将响应以JSON格式输出并结束请求处理
 	// 参数:

@@ -13,8 +13,8 @@ type CurdReq struct {
 	Action    string `p:"a" v:"required"`
 }
 
-func Controller(ctx context.Context, req *CurdReq, check func(i string) (Curd, error)) (res *response.JsonRes, err error) {
-	res = new(response.JsonRes)
+func Controller(ctx context.Context, req *CurdReq, check func(i string) (Curd, error)) (res response.Resp, err error) {
+	r := new(response.JsonRes)
 	cu, err := check(req.Interface)
 	if err != nil {
 		return nil, err
@@ -25,22 +25,22 @@ func Controller(ctx context.Context, req *CurdReq, check func(i string) (Curd, e
 	cu.SetCtx(ctx)
 	switch req.Action {
 	case "list":
-		res.Data, err = cu.List()
+		r.Data, err = cu.List()
 	case "tree":
-		res.Data, err = cu.Tree()
+		r.Data, err = cu.Tree()
 	case "options":
-		res.Data, err = cu.Options()
+		r.Data, err = cu.Options()
 	case "add":
 		err = cu.Add()
-		res.Message = "新增成功"
+		r.Message = "新增成功"
 	case "edit":
 		err = cu.Edit()
-		res.Message = "修改成功"
+		r.Message = "修改成功"
 	case "del":
 		err = cu.Del()
-		res.Message = "删除成功"
+		r.Message = "删除成功"
 	default:
 		err = gerror.NewCode(response.Code(3), "接口参数错误")
 	}
-	return
+	return r, nil
 }
