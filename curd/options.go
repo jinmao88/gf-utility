@@ -19,7 +19,7 @@ func BuildOptions[T Options](a []T) (res []Option) {
 	for _, t := range a {
 		res = append(res, Option{
 			Label: t.GetOptionLabel(),
-			Value: t.GetOptionKey(),
+			Value: t.GetOptionValue(),
 			Key:   t.GetOptionKey(),
 			Data:  t.GetData(),
 		})
